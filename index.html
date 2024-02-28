@@ -15,7 +15,7 @@
                 <img src="assets/alura-logo.png">
             </div>
             <div class="text-area-container">
-                <textarea placeholder="Digite seu texto" name="teste" id="" cols="30" rows="10"></textarea>
+                <textarea id="texto" placeholder="Digite seu texto" name="teste" id="" cols="30" rows="10"></textarea>
             </div>
             <div class="footer-container">
                 <div class="alert">
@@ -23,8 +23,8 @@
                     <span>Apenas letras minúsculas e sem acento.</span>
                 </div>
                 <div class="buttons-container">
-                    <button class="button button_primary w-md-50">teste</button>
-                    <button class="button button_outline w-md-50">testando</button>
+                    <button class="button button_primary w-md-50" onclick="criptografar()">criptografar</button>
+                    <button class="button button_outline w-md-50" onclick="descriptografar()">descriptografar</button>
 
                 </div>
             </div>
@@ -37,7 +37,7 @@
             </div>
 
             <div class="result">
-                <div class="result-text">
+                <div class="result-text" id="mensagem">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci montes, sit et diam risus scelerisque vitae est. Tortor maecenas nunc ut laoreet. Eget diam mauris quam quisque ut eget fringilla sit elit. Libero, sodales duis fames id diam feugiat aliquet non egestas.
                 </div>
                 <div class="result-buttons">
@@ -46,6 +46,49 @@
             </div>
         </div>
     </div>
+    <script>
+        // Declaração de variáveis globais
+let textoElemento = document.getElementById("texto");
+let mensagemElemento = document.getElementById("mensagem");
+
+// Função para criptografar
+function criptografar() {
+    let textoOriginal = textoElemento.value.toLowerCase();
+    console.log('passou aqui cript')
     
+    // Substitui as letras conforme as regras
+    textoOriginal = textoOriginal.replace(/e/g, 'enter');
+    textoOriginal = textoOriginal.replace(/i/g, 'imes');
+    textoOriginal = textoOriginal.replace(/a/g, 'ai');
+    textoOriginal = textoOriginal.replace(/o/g, 'ober');
+    textoOriginal = textoOriginal.replace(/u/g, 'ufat');
+
+    mensagemElemento.innerHTML = textoOriginal;
+    console.log('texto original', textoOriginal)
+}
+
+// Função para descriptografar
+function descriptografar() {
+    let textoCriptografado = textoElemento.value.toLowerCase();
+    console.log('passou aqui descript')
+    
+    // Reverte as substituições
+    textoCriptografado = textoCriptografado.replace(/enter/g, 'e');
+    textoCriptografado = textoCriptografado.replace(/imes/g, 'i');
+    textoCriptografado = textoCriptografado.replace(/ai/g, 'a');
+    textoCriptografado = textoCriptografado.replace(/ober/g, 'o');
+    textoCriptografado = textoCriptografado.replace(/ufat/g, 'u');
+
+    mensagemElemento.innerHTML = textoCriptografado;
+    console.log('textoCriptografado', textoCriptografado)
+}
+
+// Função para copiar para a área de transferência
+function copiar() {
+    let textoCopiado = mensagemElemento.innerHTML;
+    navigator.clipboard.writeText(textoCopiado);
+    alert("Texto copiado para a área de transferência!");
+}
+    </script>
 </body>
 </html>
